@@ -8,12 +8,11 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
+import javax.swing.JOptionPane;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 public class FormContador {
     private JFrame form;
@@ -23,6 +22,7 @@ public class FormContador {
     int candidato1 = 0, candidato2 = 0, total = 0;
     
     public FormContador() {
+        String nome1 = JOptionPane.showInputDialog("Identifique o primeiro candidato.");
         inicializarComponentes() ;
     }
     
@@ -64,7 +64,7 @@ public class FormContador {
         
         
                 // CANDIDATOS
-        lblCand1 = new JLabel("Candidato 1:");
+        lblCand1 = new JLabel("%s :", nome1);
         lblCand1.setBounds(50, 30, 90, 30);
         painelDeConteudo.add(lblCand1);
         
@@ -238,13 +238,39 @@ public class FormContador {
         btnReset.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                candidato1 = 0;
-                candidato2 = 0;
-                total = 0;
-                lblTotalCand1.setText(String.format("Votos Candidato 1: %s", String.valueOf(candidato1)));
-                lblTotalCand2.setText(String.format("Votos Candidato 2: %s", String.valueOf(candidato2)));
-                lblTotalVotos.setText(String.format("Total de Votos: %s", String.valueOf(total)));
-            } 
+                
+                int certeza = JOptionPane.showConfirmDialog(null,"Tem certeza? essa ação é irreversivel.");
+                
+                if(certeza == 0){
+                    candidato1 = 0;
+                    candidato2 = 0;
+                    total = 0;
+
+                    FileWriter arquivo;
+
+                    try{
+                            arquivo = new FileWriter(new File("candidato1.txt"));
+                            arquivo.write(String.valueOf(candidato1));
+                            arquivo.close();
+
+                            arquivo = new FileWriter(new File("candidato2.txt"));
+                            arquivo.write(String.valueOf(candidato2));
+                            arquivo.close();
+
+                            arquivo = new FileWriter(new File("Total.txt"));
+                            arquivo.write(String.valueOf(total));
+                            arquivo.close();
+                    } 
+                    catch (IOException j){
+                    System.out.println("An error occurred.");
+                    j.printStackTrace();
+                    }
+
+                    lblTotalCand1.setText(String.format("Votos Candidato 1: %s", String.valueOf(candidato1)));
+                    lblTotalCand2.setText(String.format("Votos Candidato 2: %s", String.valueOf(candidato2)));
+                    lblTotalVotos.setText(String.format("Total de Votos: %s", String.valueOf(total)));
+            }
+            }
         });
         painelDeConteudo.add(btnReset);
         
