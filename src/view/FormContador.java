@@ -16,13 +16,17 @@ import java.io.IOException;
 
 public class FormContador {
     private JFrame form;
-    private JLabel lblCand1, lblCand2, lblTotalVotos, lblTotalCand1, lblTotalCand2;
+    private JLabel lblCand1, lblCand2, lblCand3, lblCand4, lblTotalVotos, lblTotalCand1, lblTotalCand2;
     private JButton btnAumentCand1, btnDiminCand1, btnAumentCand2, btnDiminCand2, btnReset;
     
     int candidato1 = 0, candidato2 = 0, total = 0;
+    String nome1, nome2, nome3, nome4;
     
     public FormContador() {
-        String nome1 = JOptionPane.showInputDialog("Identifique o primeiro candidato.");
+        
+        nome1 = JOptionPane.showInputDialog("Identifique o primeiro candidato.");
+        nome2 = JOptionPane.showInputDialog("Identifique o segundo candidato.");
+        
         inicializarComponentes() ;
     }
     
@@ -64,13 +68,27 @@ public class FormContador {
         
         
                 // CANDIDATOS
-        lblCand1 = new JLabel("%s :", nome1);
-        lblCand1.setBounds(50, 30, 90, 30);
+        lblCand1 = new JLabel(nome1 + ":");
+        lblCand1.setBounds(50, 30, 150, 30);
         painelDeConteudo.add(lblCand1);
         
-        lblCand2 = new JLabel("Candidato 2:");
-        lblCand2.setBounds(50, 80, 90, 30);
+        lblCand2 = new JLabel(nome2 + ":");
+        lblCand2.setBounds(50, 80, 150 , 30);
         painelDeConteudo.add(lblCand2);
+        
+        /*if(nome3 != null || nome3.isEmpty() )
+        {
+            lblCand3 = new JLabel(nome3 + ":");
+            lblCand3.setBounds(50, 130, 90, 30);
+            painelDeConteudo.add(lblCand3);
+        }
+        
+        if(nome4 != null || nome4 != "" )
+        {
+            lblCand4 = new JLabel(nome4 + ":");
+            lblCand4.setBounds(50, 180, 90, 30);
+            painelDeConteudo.add(lblCand4);
+        }*/
         
                 // BOTÕES
         btnAumentCand1 = new JButton("+1 Voto");
@@ -103,7 +121,7 @@ public class FormContador {
                 j.printStackTrace();
                 }
                 
-                lblTotalCand1.setText(String.format("Votos Candidato 1: %s", String.valueOf(candidato1)));
+                lblTotalCand1.setText(String.format("%s: %s", nome1,String.valueOf(candidato1)));
                 lblTotalVotos.setText(String.format("Total de Votos: %s", String.valueOf(total)));
             } 
         });
@@ -139,7 +157,7 @@ public class FormContador {
                 j.printStackTrace();
                 }
                 
-                lblTotalCand1.setText(String.format("Votos Candidato 1: %s", String.valueOf(candidato1)));
+                lblTotalCand1.setText(String.format("%s: %s", nome1,String.valueOf(candidato1)));
                 lblTotalVotos.setText(String.format("Total de Votos: %s", String.valueOf(total)));
             } 
         });
@@ -175,7 +193,7 @@ public class FormContador {
                 j.printStackTrace();
                 }
                 
-                lblTotalCand2.setText(String.format("Votos Candidato 2: %s", String.valueOf(candidato2)));
+                lblTotalCand2.setText(String.format("%s: %s", nome2,String.valueOf(candidato2)));
                 lblTotalVotos.setText(String.format("Total de Votos: %s", String.valueOf(total)));
             } 
         });
@@ -213,7 +231,7 @@ public class FormContador {
                 j.printStackTrace();
                 }
                 
-                lblTotalCand2.setText(String.format("Votos Candidato 2: %s", String.valueOf(candidato2)));
+                lblTotalCand2.setText(String.format("%s: %s", nome2 ,String.valueOf(candidato2)));
                 lblTotalVotos.setText(String.format("Total de Votos: %s", String.valueOf(total)));
             } 
         });
@@ -266,8 +284,8 @@ public class FormContador {
                     j.printStackTrace();
                     }
 
-                    lblTotalCand1.setText(String.format("Votos Candidato 1: %s", String.valueOf(candidato1)));
-                    lblTotalCand2.setText(String.format("Votos Candidato 2: %s", String.valueOf(candidato2)));
+                    lblTotalCand1.setText(String.format("%s: %s", nome1,String.valueOf(candidato1)));
+                    lblTotalCand2.setText(String.format("%s: %s", nome2,String.valueOf(candidato2)));
                     lblTotalVotos.setText(String.format("Total de Votos: %s", String.valueOf(total)));
             }
             }
